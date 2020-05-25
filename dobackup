@@ -1,0 +1,20 @@
+#!/bin/sh
+
+date="$(date +"%m%d%Y")"
+BK_HOME="/media/$USER/Sys_Backup/"
+BK_MEDIADISK="/media/$USER/Med_Backup/"
+
+# check if the both medias (usb) were incerted
+[ -d "$BK_HOME" ] && echo "Media for HOME backup is incerted" || { echo "Media for HOME backup is NOT incerted"; exit; }
+[ -d "$BK_MEDIADISK" ] && echo "Media for MEDIADISK backup is incerted" || { echo "Media for MEDIADISK backup is NOT incerted"; exit; }
+
+echo "Clearing previous backups..."
+rm /media/$USER/SYS_BACKUP/backup/laptop/*
+rm /media/$USER/MED_BACKUP/backup/laptop/*
+
+echo "Archiving HOME..."
+# tar -cvpz ~/Documents/ ~/eclipse ~/eclipse-workspace/ ~/scripts/ ~/.atom/ ~/.cache/ ~/.calcurse/ ~/.config/ ~/.electrum/ ~/eclipse ~/.icons/ ~/.local/share/fonts/ ~/.local/share/ranger/ ~/.moc/ ~/.texlive2019/ ~/.themes/ ~/.vim/ ~/wal.png ~/.bashrc/ ~/.vimrc/ | split -d -b 3500m - /media/$USER/SYS_BACKUP/backup/laptop/home_backup_${date}.tar.gz.
+tar -cvpjf /media/$USER/Sys_Backup/backup/laptop/home_backup_${date}.tar.bz2 ~/Documents/ ~/eclipse ~/eclipse-workspace/ ~/scripts/ ~/.atom/ ~/.cache/ ~/.calcurse/ ~/.config/ ~/.electrum/ ~/eclipse ~/.icons/ ~/.local/share/fonts/ ~/.local/share/ranger/ ~/.moc/ ~/.texlive2019/ ~/.themes/ ~/.vim/ ~/wal.png ~/.bashrc/ ~/.vimrc/ 
+
+echo "Archiving MEDIADISK..."
+tar -cvpjf /media/$USER/Med_Backup/backup/laptop/media_backup_${date}.tar.bz2 /media/$USER/mediadisk/ 

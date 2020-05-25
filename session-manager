@@ -1,0 +1,28 @@
+#!/bin/bash
+
+SESSION_DO=("Lock
+Logout
+Reboot
+Shutdown
+quit")
+
+choice=$(echo -e "${SESSION_DO[@]}" | dmenu -i -p 'Session do: ' -nb "#2f343f" -nf "#f3f4f5"  -sb "#66686c" -sf "#f3f4f5")
+
+# echo "$choice"
+
+case "$choice" in
+    Lock)
+        echo "Locking the session..." && mocp -P ; playerctl -a pause ; i3lock-mod
+    ;;
+    Logout)
+        echo "Logging out..." && i3-msg exit
+    ;;
+    Reboot)
+        echo "Rebooting now..." && reboot
+    ;;
+    Shutdown)
+        echo "Shutting down now..." && poweroff
+    ;;
+    quit)
+        echo "Script terminated..." && exit
+esac

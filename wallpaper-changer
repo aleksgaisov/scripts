@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [ "$1" != "" -a -f "$1" ]
+then
+  feh --bg-fill $1
+else
+  WAL="$(find "/media/aleks/mediadisk/images/wallpapers/" -type f -name '*.png' -o -name '*.jpg' | shuf -n 1)"
+  feh --bg-fill $WAL
+fi

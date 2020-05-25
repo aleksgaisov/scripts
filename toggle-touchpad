@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# Get the TouchPad input device ID
+# TD_ID="$(xinput --list | grep "TouchPad" | sed "s/.*id=//" | cut -c 1-2)"
+TD_ID="11"
+# Get the TouchPad current status (1-on/0-off)
+TD_STATUS="$(xinput list-props $TD_ID | grep "Device Enabled" | rev | cut -c 1)"
+# Get the Device Enabled propertry ID
+PROP_ID="$(xinput list-props $TD_ID | grep "Device Enabled" | sed "s/.*(//" | sed "s/).*//")"
+
+# echo "$TD_ID"
+# echo "$TD_STATUS"
+# echo "$PROP_ID"
+
+# Toggle the TouchPad depending on its state
+[ "$TD_STATUS" -eq "1" ] && xinput set-prop 11 164 0 || xinput set-prop 11 164 1
