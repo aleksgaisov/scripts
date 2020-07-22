@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Restart the dwmblocks status bar
+killall dwmblocks 2>/dev/null && dwmblocks || exit 1
