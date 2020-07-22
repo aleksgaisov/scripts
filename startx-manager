@@ -1,0 +1,50 @@
+#!/bin/bash
+
+WM_ARR=("qtile" "spectrwm" "dwm")
+
+echo ""
+echo "Choose option to start:"
+echo "======================="
+
+# List all the avaliable option
+
+echo "random(r)"
+echo "tty1(t)"
+echo "---"
+
+for i in ${!WM_ARR[*]}
+do
+    echo "${WM_ARR[i]}($i)"
+done
+
+echo "======================="
+
+echo ""
+
+read -p "Start: " choice
+
+echo ""
+
+# Start Xorg session with a chosen WM
+if [ "$choice" = "r" ] || [ "$choice" = "random" ]
+then
+    echo "Chooising option at random..."
+    startx ~/.xinitrc $(echo "$(printf "%s\n" ${WM_ARR[@]} | shuf -n 1)")
+elif [ "$choice" = "t" ] || [ "$choice" = "tty1" ]
+then
+    echo "Continuing in tty1..." && exit 0
+elif [ "$choice" = "0" ] || [ "$choice" = "qtile" ]
+then
+    echo "Starting qtile..."
+    startx ~/.xinitrc qtile
+elif [ "$choice" = "1" ] || [ "$choice" = "spectrwm" ]
+then
+    echo "Starting spectrwm..."
+    startx ~/.xinitrc spectrwm
+elif [ "$choice" = "2" ] || [ "$choice" = "dwm" ]
+then
+    echo "Starting dwm..."
+    startx ~/.xinitrc dwm
+else
+    echo -e "Unknown opntion\nContinuing in tty1..." && exit 1
+fi
