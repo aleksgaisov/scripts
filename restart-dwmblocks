@@ -1,4 +1,12 @@
 #!/bin/sh
 
+#       _        ______
+#      / \     .' ___  |   Display Monitor Switching Sript
+#     / _ \   / .'   \_|   ---------------------------
+#    / ___ \  | |   ____   (GitHub: https://github.com/aleksgaisov)
+#  _/ /   \ \_\ `.___]  |  Last modified: 22/07/2020
+# |____| |____|`._____.'   ---------------------------
+
+
 # Restart the dwmblocks status bar
 killall dwmblocks 2>/dev/null && dwmblocks || exit 1

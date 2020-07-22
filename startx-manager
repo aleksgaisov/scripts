@@ -1,5 +1,13 @@
 #!/bin/bash
 
+#       _        ______
+#      / \     .' ___  |   Session Manager Script (with dmenu) 
+#     / _ \   / .'   \_|   ---------------------------
+#    / ___ \  | |   ____   (GitHub: https://github.com/aleksgaisov)
+#  _/ /   \ \_\ `.___]  |  Last modified: 22/07/2020
+# |____| |____|`._____.'   ---------------------------
+
+
 WM_ARR=("qtile" "spectrwm" "dwm")
 
 echo ""
