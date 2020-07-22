@@ -1,6 +1,14 @@
 #!/bin/sh
 
-ICON="/home/$USER/lock-icon.png"
+#       _        ______
+#      / \     .' ___  |   Custom i3-lock Script (with dmenu)
+#     / _ \   / .'   \_|   ---------------------------
+#    / ___ \  | |   ____   (GitHub: https://github.com/aleksgaisov)
+#  _/ /   \ \_\ `.___]  |  08/06/2020
+# |____| |____|`._____.'   ---------------------------
+
+
+ICON="/home/$USER/pix/lock-icon.png"
 TMPBG="/tmp/screen.png"
 [ -f "/tmp/screen.png" ] && rm "/tmp/screen.png"
 scrot /tmp/screen.png
