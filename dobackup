@@ -1,20 +1,43 @@
 #!/bin/sh
 
+#       _        ______
+#      / \     .' ___  |   A Backup to External Storage Script
+#     / _ \   / .'   \_|   ---------------------------
+#    / ___ \  | |   ____   (GitHub: https://github.com/aleksgaisov)
+#  _/ /   \ \_\ `.___]  |  19/06/2020  
+# |____| |____|`._____.'   ---------------------------
+
+
 date="$(date +"%m%d%Y")"
-BK_HOME="/media/$USER/Sys_Backup/"
-BK_MEDIADISK="/media/$USER/Med_Backup/"
+BK_HOME="/media/sys_backup/backup"
+BK_MEDIADISK="/media/med_backup/backup"
 
 # check if the both medias (usb) were incerted
-[ -d "$BK_HOME" ] && echo "Media for HOME backup is incerted" || { echo "Media for HOME backup is NOT incerted"; exit; }
-[ -d "$BK_MEDIADISK" ] && echo "Media for MEDIADISK backup is incerted" || { echo "Media for MEDIADISK backup is NOT incerted"; exit; }
+[ -d "$BK_HOME" ] && echo "Media for HOME backup is incerted" || { echo -e "Media for HOME backup is NOT mounted\nExiting..."; exit; }
+[ -d "$BK_MEDIADISK" ] && echo "Media for MEDIADISK backup is incerted" || { echo -e "Media for MEDIADISK backup is NOT mounted\nExiting..."; exit; }
 
-echo "Clearing previous backups..."
-rm /media/$USER/SYS_BACKUP/backup/laptop/*
-rm /media/$USER/MED_BACKUP/backup/laptop/*
+echo "Removing previous backups..."
+rm /media/sys_backup/backup/laptop/*
+rm /media/med_backup/backup/laptop/*
 
 echo "Archiving HOME..."
-# tar -cvpz ~/Documents/ ~/eclipse ~/eclipse-workspace/ ~/scripts/ ~/.atom/ ~/.cache/ ~/.calcurse/ ~/.config/ ~/.electrum/ ~/eclipse ~/.icons/ ~/.local/share/fonts/ ~/.local/share/ranger/ ~/.moc/ ~/.texlive2019/ ~/.themes/ ~/.vim/ ~/wal.png ~/.bashrc/ ~/.vimrc/ | split -d -b 3500m - /media/$USER/SYS_BACKUP/backup/laptop/home_backup_${date}.tar.gz.
-tar -cvpjf /media/$USER/Sys_Backup/backup/laptop/home_backup_${date}.tar.bz2 ~/Documents/ ~/eclipse ~/eclipse-workspace/ ~/scripts/ ~/.atom/ ~/.cache/ ~/.calcurse/ ~/.config/ ~/.electrum/ ~/eclipse ~/.icons/ ~/.local/share/fonts/ ~/.local/share/ranger/ ~/.moc/ ~/.texlive2019/ ~/.themes/ ~/.vim/ ~/wal.png ~/.bashrc/ ~/.vimrc/ 
+tar -cvpjf /media/sys_backup/backup/laptop/home_backup_${date}.tar.bz2 \
+~/dox \
+~/pix \
+~/scripts \
+~/repos \
+~/.calcurse \
+~/.config \
+~/.local/share/fonts \
+~/.local/share/ranger \
+~/.moc \
+~/.vim \
+/usr/share/themes \
+/usr/share/icons \
+~/.bashrc \
+~/.vimrc \
+~/.bash_profile \
+~/.xinitrc
 
 echo "Archiving MEDIADISK..."
-tar -cvpjf /media/$USER/Med_Backup/backup/laptop/media_backup_${date}.tar.bz2 /media/$USER/mediadisk/ 
+tar -cvpjf /media/med_backup/backup/laptop/media_backup_${date}.tar.bz2 /media/mediadisk
