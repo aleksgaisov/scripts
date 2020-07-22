@@ -1,12 +1,19 @@
 #!/bin/bash
 
+#       _        ______
+#      / \     .' ___  |   Session Manager Script (with dmenu) 
+#     / _ \   / .'   \_|   ---------------------------
+#    / ___ \  | |   ____   (GitHub: https://github.com/aleksgaisov)
+#  _/ /   \ \_\ `.___]  |  22/06/2020
+# |____| |____|`._____.'   ---------------------------
+
+
 SESSION_DO=("Lock
-Logout
 Reboot
 Shutdown
 quit")
 
-choice=$(echo -e "${SESSION_DO[@]}" | dmenu -i -p 'Session do: ' -nb "#2f343f" -nf "#f3f4f5"  -sb "#66686c" -sf "#f3f4f5")
+choice=$(echo -e "${SESSION_DO[@]}" | dmenu -i -p 'Session do: ' -fn 'SauceCodePro Nerd Font Mono:size=11')
 
 # echo "$choice"
 
@@ -14,14 +21,11 @@ case "$choice" in
     Lock)
         echo "Locking the session..." && mocp -P ; playerctl -a pause ; i3lock-mod
     ;;
-    Logout)
-        echo "Logging out..." && i3-msg exit
-    ;;
     Reboot)
-        echo "Rebooting now..." && reboot
+        echo "Rebooting now..." && sudo reboot now
     ;;
     Shutdown)
-        echo "Shutting down now..." && poweroff
+        echo "Shutting down now..." && sudo shutdown now
     ;;
     quit)
         echo "Script terminated..." && exit
