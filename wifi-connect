@@ -1,0 +1,30 @@
+#!/bin/sh
+
+#       _        ______
+#      / \     .' ___  |   Connect to Network Script (with dmenu) 
+#     / _ \   / .'   \_|   ---------------------------
+#    / ___ \  | |   ____   (GitHub: https://github.com/aleksgaisov)
+#  _/ /   \ \_\ `.___]  |  08/06/2020
+# |____| |____|`._____.'   ---------------------------
+
+
+# List all the nearby netwokrs
+echo -e "\nScanning for nearby networks...\n"
+
+nmcli device wifi list
+
+echo ""
+
+# Prompt user for the SSID
+read -p "Enter SSID: " SSID
+
+# Prompt user for the password
+read -s -p "Password: " PASS
+
+echo ""
+
+echo -e "\nTrying to connect to ${SSID}..."
+
+nmcli device wifi connect "${SSID}" password "${PASS}" \
+&& echo "Succesfully connected!!!" \
+|| echo "Failed to connect"
