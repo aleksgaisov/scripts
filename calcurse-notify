@@ -1,16 +1,15 @@
 #!/bin/sh
 
-export DISPLAY=:0
+#       _        ______
+#      / \     .' ___  |   Calcurse Notification Script 
+#     / _ \   / .'   \_|   ---------------------------
+#    / ___ \  | |   ____   (GitHub: https://github.com/aleksgaisov)
+#  _/ /   \ \_\ `.___]  |  08/06/2020
+# |____| |____|`._____.'   ---------------------------
 
-get_str="$( calcurse -n )"
 
-# app_hors="$( echo $get_str | cut -b 20-21 )"
-app_mins="$( echo $get_str | cut -b 23-24 )"
-app_desc="$( echo $get_str | cut -b 27- )"
+# Get a name of the next appointment
+apt_name="$(calcurse -n | grep -v "next appointment:" | sed 's/.* //')"
 
-#if [ "$( echo $get_str | cut -b 20-21 )" = "00" ] && [ "$( echo $get_str | cut -b 23-24 )" = "15" ]
-#then 
-    #notify-send -t 10000 -u normal "$(echo "In $app_mins min\n---------\n$app_desc")"
-#fi
-
-notify-send -t 10000 -u normal "$(echo "In $app_mins min\n---------\n$app_desc")"
+# Send the notification about the upcomming appointment
+notify-send -u normal $(echo "Appointment!!! ==========\n${apt_name}")
