@@ -1,3 +1,11 @@
 #!/bin/sh
 
+#       _        ______
+#      / \     .' ___  |   Switch OFF Backlight Script 
+#     / _ \   / .'   \_|   ---------------------------
+#    / ___ \  | |   ____   (GitHub: https://github.com/aleksgaisov)
+#  _/ /   \ \_\ `.___]  |  08/06/2020
+# |____| |____|`._____.'   ---------------------------
+
+
 sleep 1 ; xset dpms force off
