@@ -1,5 +1,13 @@
 #!/bin/sh
 
+#       _        ______
+#      / \     .' ___  |   Toggle Touchpad Device Script 
+#     / _ \   / .'   \_|   ---------------------------
+#    / ___ \  | |   ____   (GitHub: https://github.com/aleksgaisov)
+#  _/ /   \ \_\ `.___]  |  08/06/2020
+# |____| |____|`._____.'   ---------------------------
+
+
 # Get the TouchPad input device ID
 # TD_ID="$(xinput --list | grep "TouchPad" | sed "s/.*id=//" | cut -c 1-2)"
 TD_ID="11"
@@ -13,4 +21,4 @@ PROP_ID="$(xinput list-props $TD_ID | grep "Device Enabled" | sed "s/.*(//" | se
 # echo "$PROP_ID"
 
 # Toggle the TouchPad depending on its state
-[ "$TD_STATUS" -eq "1" ] && xinput set-prop 11 164 0 || xinput set-prop 11 164 1
+[ "$TD_STATUS" -eq "1" ] && xinput set-prop 11 167 0 || xinput set-prop 11 167 1
