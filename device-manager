@@ -1,0 +1,39 @@
+#!/bin/bash
+
+#       _        ______
+#      / \     .' ___  |   Managing Devices Script (with dmenu)
+#     / _ \   / .'   \_|   ---------------------------
+#    / ___ \  | |   ____   (GitHub: https://github.com/aleksgaisov)
+#  _/ /   \ \_\ `.___]  |  22/06/2020
+# |____| |____|`._____.'   ---------------------------
+
+
+# Get the list of all connected devices' paths
+# (excluding sda)
+DEVICES=("$(lsblk -o PATH,FSUSED,SIZE | grep "sd.[1-9]" | grep -v "sda" | sed 's/ //' | sed 's/ / (/' | sed 's/$/)/' | sed 's/G /G\//')
+quit")
+
+choice_device=$(echo -e "${DEVICES[@]}" | dmenu -i -l 4 -p 'Manage device: ' -fn 'SauceCodePro Nerd Font Mono:size=11' | sed 's/ .*//')
+
+[ $choice_device = "quit" ] && { echo "Program terminated..."; exit 0; }
+
+echo "$choice_device"
+
+# If device is not yet mounted - ask to mount
+if [[ "$(lsblk -o PATH,MOUNTPOINT | grep $choice_device | sed 's/.* //')" = "" ]]
+then
+    echo "device not mounted"
+    choice_do=$(echo -e "mount" | dmenu -i -l 1 -p 'Do: ' -fn 'SauceCodePro Nerd Font Mono:size=11')
+
+    choice_dir=$( ls /media | dmenu -i -l 4 -p 'Where: ' -fn 'SauceCodePro Nerd Font Mono:size=11')
+
+    sudo mount $choice_device /media/${choice_dir} &&  echo "$choice_do the $choice_device to $choice_dir"
+
+# Else - ask to unmount
+else
+    echo "device mounted"
+    choice_do=$(echo -e "unmount" | dmenu -i -l 1 -p 'Do: ' -fn 'SauceCodePro Nerd Font Mono:size=11')
+    
+    sudo umount $choice_device && echo "$choice_device unmounted"
+
+fi
