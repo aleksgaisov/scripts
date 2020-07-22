@@ -9,6 +9,7 @@ Some of the scripts are not entirely written by me. These scripts have an approp
 
 * calcurse-notify
   * spawn notifications for the calcurse calendar app
+  * _Depends on:_ calcurse
 * corona
   * prints out the recent COVID-19 data inside the terminal
   * [Source](https://github.com/sagarkarira/coronavirus-tracker-cli)
