@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Disable beeping
+xset b off
+# Turn off the screen saver
+xset s off
+# Disable DPMS
+xset -dpms
+
+# Start notification deamon
+dunst &
