@@ -1,9 +1,30 @@
 #!/bin/sh
 
-if [ "$1" != "" -a -f "$1" ]
+#       _        ______
+#      / \     .' ___  |   Wallpaper Changing Script 
+#     / _ \   / .'   \_|   ---------------------------
+#    / ___ \  | |   ____   (GitHub: https://github.com/aleksgaisov)
+#  _/ /   \ \_\ `.___]  |  28/06/2020
+# |____| |____|`._____.'   ---------------------------
+
+
+if [ "$1" != "" ]
 then
-  feh --bg-fill $1
+
+    if [ -f "$1" ] 
+    then
+        echo "Using $1 as a wallpaper..." 
+        notify-send -i $1 -u low 'Wallpaper is set'
+        feh --bg-scale $1
+    else
+        echo "File does not exists" 
+        exit 1
+    fi
+  
 else
-  WAL="$(find "/media/aleks/mediadisk/images/wallpapers/" -type f -name '*.png' -o -name '*.jpg' | shuf -n 1)"
-  feh --bg-fill $WAL
+  WAL="$(find "/media/mediadisk/images/wallpapers/" -type f -name '*.png' -o -name '*.jpg' | shuf -n 1)"
+  echo "Choosing a random wallpaper..."
+  echo "Using ${WAL} as a wallpaper..."
+  notify-send -i $WAL -u low 'Wallpaper is set'
+  feh --bg-scale $WAL
 fi
